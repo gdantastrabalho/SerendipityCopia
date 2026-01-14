@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serendipity School - Educação Bilíngue Premium Rio de Janeiro</title>
+    <style>
+        :root {
+            --color-primary: #d4af37;
+            --color-dark: #2c1810;
+            --color-light: #f5f1e8;
+            --color-accent: #8b7355;
+            --color-text: #3d3d3d;
+            --color-border: #e0d5c7;
+            --color-white: #ffffff;
+            --spacing-base: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --transition-default: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', 'Garamond', serif;
+            color: var(--color-text);
+            background-color: var(--color-light);
+            line-height: 1.6;
+        }
+
+        /* Header e Navegação */
+        header {
+            background-color: var(--color-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-base) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color-dark);
+            text-decoration: none;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-text);
+            font-size: 0.95rem;
+            transition: var(--transition-default);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: var(--transition-default);
+        }
+
+        .nav-item:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 0.5rem 0;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition-default);
+            margin-top: 0.5rem;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--color-text);
+            text-decoration: none;
+            transition: var(--transition-default);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--color-light);
+            color: var(--color-primary);
+            padding-left: 2rem;
+        }
+
+        .language-toggle {
+            background: none;
+            border: 1px solid var(--color-border);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-default);
+        }
+
+        .language-toggle:hover {
+            background-color: var(--color-light);
+            color: var(--color-primary);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            transition: var(--transition-default);
+            z-index: 999;
+            border: none;
+            font-size: 2rem;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Page Container */
+        .page-container {
+            display: none;
+        }
+
+        .page-container.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-accent) 100%);
+            color: var(--color-white);
+            padding: 4rem var(--spacing-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="1200" height="600" fill="url(%23pattern)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-default);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-dark);
+        }
+
+        .btn-primary:hover {
+            background-color: #e5c158;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-white);
+            border: 2px solid var(--color-white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-white);
+            color: var(--color-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: var(--spacing-xl) var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--color-dark);
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-primary);
+            border-radius: 2px;
+        }
+
+        /* Tabs de Currículo */
+        .curriculum-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--color-border);
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-default);
+            position: relative;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-button:hover {
+            color: var(--color-primary);
+        }
+
+        .tab-button.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .curriculum-card {
+            background-color: var(--color-white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--color-primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: var(--transition-default);
+        }
+
+        .curriculum-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .curriculum-card h3 {
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .curriculum-card p {
+            color: var(--color-text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Galeria */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            aspect-ratio: 1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: var(--transition-default);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-default);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(44, 24, 16, 0.7);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: var(--transition-default);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-label {
+            color: var(--color-white);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Segments */
+        .segments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .segment-card {
+            background: linear-gradient(135deg, var(--color-light) 0%, var(--color-white) 100%);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            transition: var(--transition-default);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .segment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            border-color: var(--color-primary);
+        }
+
+        .segment-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .segment-card h3 {
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .segment-card p {
+            color: var(--color-text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--color-white);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .modal-header h2 {
+            color: var(--color-dark);
+            font-size: 1.8rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: var(--transition-default);
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: var(--color-primary);
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--color-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition-default);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            padding: 3rem var(--spacing-lg) 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-section h3 {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--color-light);
+            text-decoration: none;
+            transition: var(--transition-default);
+            cursor: pointer;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: var(--color-light);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Banner de Admissão */
+        .admission-banner {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #c9a961 100%);
+            color: var(--color-dark);
+            padding: 2rem var(--spacing-lg);
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .admission-banner h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .admission-banner p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .curriculum-tabs {
+                gap: 0.5rem;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a onclick="goToPage('home')" class="logo">SERENDIPITY</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" data-translate="escola">
+                        Escola
+                        <span class="dropdown-arrow">▾</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a onclick="goToPage('bilinguismo')" data-translate="bilinguismo">Bilinguismo (Português e Inglês)</a>
+                        <a onclick="goToPage('reggio')" data-translate="reggio">Reggio Emilia</a>
+                        <a onclick="goToPage('literatura')" data-translate="literatura">Literatura & Filosofia</a>
+                        <a onclick="goToPage('ppp')" data-translate="ppp">Projeto Político Pedagógico</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-translate="palacio">
+                        Palácio
+                        <span class="dropdown-arrow">▾</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a onclick="goToPage('palacio-sobre')" data-translate="sobre-palacio">Sobre o Palácio</a>
+                        <a onclick="goToPage('palacio-galeria')" data-translate="galeria-palacio">Galeria</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-translate="atelie">
+                        Ateliê
+                        <span class="dropdown-arrow">▾</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a onclick="goToPage('atelie-sobre')" data-translate="sobre-atelie">Sobre o Ateliê</a>
+                        <a onclick="goToPage('atelie-galeria')" data-translate="galeria-atelie">Galeria</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-translate="segmentos">
+                        Segmentos
+                        <span class="dropdown-arrow">▾</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a onclick="goToPage('segmentos-infantil')" data-translate="infantil">Educação Infantil</a>
+                        <a onclick="goToPage('segmentos-fundamental1')" data-translate="fundamental1">Ensino Fundamental I</a>
+                        <a onclick="goToPage('segmentos-fundamental2')" data-translate="fundamental2">Ensino Fundamental II</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a onclick="goToPage('noticias')" class="nav-link" data-translate="noticias">Notícias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="openModal('admissaoModal'); return false;" data-translate="matricula">Matrícula</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="goToPage('sobre')" class="nav-link" data-translate="sobre">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <button class="language-toggle" id="languageToggle" onclick="toggleLanguage()">EN</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page-container active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Serendipity School</h1>
+                <p class="subtitle">O Currículo Mais Luxuoso do Rio de Janeiro</p>
+                <p>Formação plena e bilíngue (Português e Inglês) com abordagem italiana Reggio Emilia, Francês, Italiano, Filosofia e Atelierismo.</p>
+                <p style="font-size: 1.2rem; margin-top: 1rem;">Dos 4 meses aos 15 anos</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="openModal('admissaoModal')">Processo de Admissão 2026</button>
+                    <button class="btn btn-secondary" onclick="goToPage('sobre')">Conhecer Mais</button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Nossa Escola</h2>
+            <div class="curriculum-tabs">
+                <button class="tab-button active" onclick="switchTab(event, 'bilinguismo-tab')">Bilinguismo</button>
+                <button class="tab-button" onclick="switchTab(event, 'reggio-tab')">Reggio Emilia</button>
+                <button class="tab-button" onclick="switchTab(event, 'literatura-tab')">Literatura & Filosofia</button>
+                <button class="tab-button" onclick="switchTab(event, 'ppp-tab')">Projeto Político</button>
+            </div>
+
+            <div id="bilinguismo-tab" class="tab-content active">
+                <div class="curriculum-grid">
+                    <div class="curriculum-card">
+                        <h3>Português & Inglês</h3>
+                        <p>Educação totalmente bilíngue desde a Educação Infantil. Nossas crianças desenvolvem fluência em ambas as línguas através de experiências imersivas e naturais.</p>
+                    </div>
+                    <div class="curriculum-card">
+                        <h3>Proficiência Global</h3>
+                        <p>Preparamos nossos alunos para comunicação eficaz em contexto internacional, com vocabulário técnico e acadêmico em ambas as línguas.</p>
+                    </div>
+                    <div class="curriculum-card">
+                        <h3>Metodologia Ativa</h3>
+                        <p>Utilizamos pedagogia ativa onde as crianças aprendem fazendo, através de projetos bilíngues que integram conteúdo significativo com desenvolvimento linguístico.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reggio-tab" class="tab-content">
+                <div class="curriculum-grid">
+                    <div class="curriculum-card">
+                        <h3>Abordagem Reggio Emilia</h3>
+                        <p>Filosofia educacional italiana que coloca a criança no centro do processo de aprendizagem. Respeito à criança como sujeito ativo e competente.</p>
+                    </div>
+                    <div class="curriculum-card">
+                        <h3>Múltiplas Linguagens</h3>
+                        <p>Expressão através de várias formas: oral, escrita, artística, corporal, musical e simbólica. Cada criança explora o mundo através de suas próprias linguagens.</p>
+                    </div>
+                    <div class="curriculum-card">
+                        <h3>Ambiente Como Terceiro Mestre</h3>
+                        <p>Nossos espaços são cuidadosamente planejados para provocar curiosidade, investigação e aprendizagem. O ambiente é pensado como ferramenta educativa fundamental.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="literatura-tab" class="tab-content">
+                <div class="curriculum-grid">
+                    <div class="curriculum-card">
+                        <h3>Literatura Clássica e Contemporânea</h3>
+                        <p>Imersão em obras literárias que ampliam perspectivas, desenvolvem pensamento crítico e cultivam sensibilidade estética desde cedo.</p>
+                    </div>
+                    <div class="curriculum-card">
+                        <h3>Filosofia para Crianças</h3>
+                        <p>Estímulo ao pensamento reflexivo e questionador. As crianças aprendem a filosofar, desenvolvendo capacidade de análise e argumentação.</p>
+                    </div>
+                    <div class="curriculum-card">
+                        <h3>Seminários e Debates</h3>
+                        <p>Espaços de diálogo onde ideias são compartilhadas e questionadas. Desenvolvimento de argumentação e respeito ao pensamento diverso.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ppp-tab" class="tab-content">
+                <div class="curriculum-grid">
+                    <div class="curriculum-card">
+                        <h3>Projeto Político Pedagógico</h3>
+                        <p>Documento que orienta toda nossa prática educativa, refletindo nossos valores, metodologias e compromissos com educação de qualidade.</p>
+                    </div>
+                    <div class="curriculum-card">
+                        <h3>Formação Integral</h3>
+                        <p>Desenvolvimento harmonioso de aspectos cognitivos, emocionais, sociais, físicos e éticos. Preparação não apenas acadêmica mas também humana.</p>
+                    </div>
+                    <div class="curriculum-card">
+                        <h3>Continuidade Educativa</h3>
+                        <p>Coerência pedagógica da Educação Infantil ao Ensino Fundamental II. Cada etapa respeita características do desenvolvimento infantil.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Segmentos</h2>
+            <div class="segments-grid">
+                <div class="segment-card" onclick="goToPage('segmentos')">
+                    <div class="segment-icon">👶</div>
+                    <h3>Educação Infantil</h3>
+                    <p>4 meses aos 5 anos. Período crucial para desenvolvimento. Ambiente acolhedor, respeitoso e estimulante com foco em aprendizagem através do brincar.</p>
+                </div>
+                <div class="segment-card" onclick="goToPage('segmentos')">
+                    <div class="segment-icon">📚</div>
+                    <h3>Ensino Fundamental I</h3>
+                    <p>6 aos 10 anos. Alfabetização e desenvolvimento de competências acadêmicas. Projetos integradores que conectam aprendizagem a situações reais.</p>
+                </div>
+                <div class="segment-card" onclick="goToPage('segmentos')">
+                    <div class="segment-icon">🎓</div>
+                    <h3>Ensino Fundamental II</h3>
+                    <p>11 aos 15 anos. Preparação para ensino médio. Desenvolvimento de pensamento crítico, autonomia e responsabilidade social.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Notícias</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>📰 Processo de Admissão 2026 Aberto</h3>
+                    <p>Estamos recebendo inscrições para o processo de admissão 2026 em todos os segmentos. Visite nossa secretaria ou clique no botão de Matrícula para mais informações.</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;" onclick="openModal('admissaoModal')">Inscrever-se</button>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🎨 Mostra de Ateliê</h3>
+                    <p>Convidamos famílias para apreciar as investigações plásticas de nossas crianças. Um dia de celebração da criatividade e aprendizagem artística.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>📖 Seminários de Literatura</h3>
+                    <p>Encontros onde pais e educadores refletem sobre educação, desenvolvimento infantil e metodologia Reggio Emilia com pesquisadores italianos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Sobre a Serendipity School</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>Nossa Missão</h3>
+                    <p>Formar crianças e adolescentes pensantes, criativas e humanizadas, capazes de contribuir positivamente para construção de um mundo mais justo e sustentável.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Nossa Visão</h3>
+                    <p>Ser referência em educação infantil e fundamental no Rio de Janeiro, reconhecida pela excelência pedagógica, metodologia inovadora e formação integral.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Nossos Valores</h3>
+                    <p>Respeito à criança, qualidade pedagógica, inovação educativa, sustentabilidade, inclusão e comprometimento com desenvolvimento integral de cada aluno.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- BILINGUISMO PAGE -->
+    <div id="bilinguismo" class="page-container">
+        <section>
+            <h2 class="section-title">Bilinguismo (Português e Inglês)</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>Imersão Total</h3>
+                    <p>Nosso programa bilíngue não é apenas aulas de inglês. É uma imersão completa onde crianças vivem experiências significativas em ambas as línguas desde a Educação Infantil.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Educadores Nativos</h3>
+                    <p>Contamos com educadores de língua materna inglesa qualificados em metodologia Reggio Emilia, garantindo autenticidade linguística e pedagógica.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Desenvolvimento Equilibrado</h3>
+                    <p>Ambas as línguas recebem igual atenção e respeito. Não há "língua secundária". Crianças desenvolvem competência em leitura, escrita, fala e compreensão em português e inglês.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Conteúdo Significativo</h3>
+                    <p>As línguas são veiculo para aprendizagem significativa - ciências, matemática, arte, história - não fins em si mesmas. Crianças aprendem ATRAVÉS das línguas, não apenas SOBRE elas.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Preparação para Mundo Global</h3>
+                    <p>Bilinguismo abre portas para oportunidades internacionais. Nossos alunos saem preparados para ambientes acadêmicos e profissionais globalizados.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Competências Cognitivas</h3>
+                    <p>Pesquisas mostram que bilinguismo desenvolve flexibilidade mental, resiliência cognitiva e criatividade. Crianças bilíngues têm vantagens no pensamento matemático e resolução de problemas.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- REGGIO PAGE -->
+    <div id="reggio" class="page-container">
+        <section>
+            <h2 class="section-title">Abordagem Reggio Emilia</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>História e Princípios</h3>
+                    <p>Nascida na região de Reggio Emilia, Itália, após segunda guerra mundial, esta abordagem revolucionou educação infantil ao respeitar a criança como ser competente, curioso e criativo.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>A Criança no Centro</h3>
+                    <p>Tudo começa com a criança - seus interesses, suas perguntas, suas investigações. O currículo não é imposto; emerge de curiosidades genuínas e investigações compartilhadas.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>100 Linguagens da Criança</h3>
+                    <p>Crianças expressam-se de múltiplas formas: fala, desenho, pintura, modelagem, construção, dança, música, dramatização. Honramos cada forma de expressão.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Observação e Documentação</h3>
+                    <p>Educadores são observadores atentos, fazendo anotações detalhadas, fotografando, gravando. Esta documentação guia o processo pedagógico e comunica aprendizagem às famílias.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>O Ambiente Como Mestre</h3>
+                    <p>Chamamos o ambiente "terceiro educador". Espaços são cuidadosamente preparados com materiais belos, naturais e provocadores que convidam à exploração e investigação.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Projetos e Investigações</h3>
+                    <p>Aprendizagem acontece através de projetos longos, às vezes durando semanas ou meses, onde crianças investigam profundamente tópicos que as fascinam genuinamente.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- LITERATURA PAGE -->
+    <div id="literatura" class="page-container">
+        <section>
+            <h2 class="section-title">Literatura & Filosofia</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>Literatura Como Experiência</h3>
+                    <p>Não ensinamos "sobre" literatura. Vivemos literatura. Crianças crescem cercadas por belos livros, ouvem histórias de forma poética, dramatizam narrativas, criam suas próprias histórias.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Clássicos e Contemporâneos</h3>
+                    <p>Selecionamos cuidadosamente obras que ampliam perspectivas infantis - desde clássicos universais até autores contemporâneos, sempre priorizando qualidade literária e profundidade temática.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Desenvolvimento do Pensamento Crítico</h3>
+                    <p>Através da literatura, crianças aprendem a questionar, analisar, interpretar e debater. Cada livro abre portas para novas formas de pensar.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Filosofia para Crianças</h3>
+                    <p>Facilitamos rodas de filosofia onde crianças discutem questões profundas: O que é amizade? Como sabemos algo? É certo desobedecer uma ordem injusta? Crianças filosofam!</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Seminários e Diálogos</h3>
+                    <p>Criamos espaços onde ideias são partilhadas respeitosamente. Crianças aprendem a ouvir diferentes perspectivas, argumentar com base em razões, ser abertas a mudança de pensamento.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Criação Literária</h3>
+                    <p>Inspiradas por leituras, crianças criam suas próprias histórias, poesias, textos dramáticos. Expressam pensamentos complexos através da linguagem literária.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PPP PAGE -->
+    <div id="ppp" class="page-container">
+        <section>
+            <h2 class="section-title">Projeto Político Pedagógico</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>O Que É</h3>
+                    <p>Documento que sistematiza a filosofia educacional da Serendipity School. Não é mera formalidade burocrática, mas expressão viva de nossas convicções pedagógicas e compromissos.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Fundamentação Teórica</h3>
+                    <p>Baseado em pesquisa educacional robusta, estudos de neurociência infantil e filosofias pedagógicas comprovadas, como Reggio Emilia, Waldorf e construcionismo social.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Objetivos de Aprendizagem</h3>
+                    <p>Define claramente o que esperamos que crianças aprendam em cada etapa - não apenas academicamente, mas também socialmente, emocionalmente, eticamente e fisicamente.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Metodologias Ativas</h3>
+                    <p>Descrevemos como acontece aprendizagem em nossas salas: através de projetos, investigações, brincadeira, arte, movimento, colaboração e reflexão.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Inclusão e Diversidade</h3>
+                    <p>Explicita nosso compromisso com inclusão verdadeira. Como acolhemos diferentes ritmos, estilos de aprendizagem, origens, gêneros e capacidades.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Avaliação Formativa</h3>
+                    <p>Não usamos provas classificatórias. Avaliamos através de observação contínua, documentação de processos, portfólios e conversas com crianças e famílias.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PALÁCIO SOBRE PAGE -->
+    <div id="palacio-sobre" class="page-container">
+        <section>
+            <h2 class="section-title">Sobre o Palácio</h2>
+            <div class="admission-banner" style="margin-bottom: 2rem;">
+                <h3>Um Espaço com História</h3>
+                <p>Localizado na histórica Rua do Catete, 84, nosso Palácio é um edifício icônico do Rio de Janeiro</p>
+            </div>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>Arquitetura Histórica</h3>
+                    <p>Preservação respeitosa de um patrimônio arquitetônico. Mantemos características originais que conferem elegância, solidez e história ao espaço educativo.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Revitalização Pedagógica</h3>
+                    <p>Modernizamos o Palácio para abrigar educação de excelência, integrando infraestrutura contemporânea mantendo integridade histórica e estética original.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Salas de Aula Espaçosas</h3>
+                    <p>Ambientes amplos e luminosos, com pé-direito alto, permitindo flexibilidade na organização e provocando sensação de bem-estar que favorece aprendizagem.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Biblioteca Sofisticada</h3>
+                    <p>Acervo cuidadosamente curado com obras literárias, livros informativos, material de referência - espaço de silêncio respeitoso e investigação intelectual.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Ateliê Completo</h3>
+                    <p>Espaço dedicado à investigação artística com materiais variados, luz natural ideal, organização que convida à exploração estética e criatividade.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Auditório e Espaços</h3>
+                    <p>Ambientes para performances, seminários e celebração de aprendizagens. Acústica e equipamento adequados para apresentações profissionais.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PALÁCIO GALERIA PAGE -->
+    <div id="palacio-galeria" class="page-container">
+        <section>
+            <h2 class="section-title">Galeria do Palácio</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/2676362c-8a34-4acc-9387-c31e58927d72.png" alt="Fachada">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Fachada Principal</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/b1bd9241-1fef-49e4-a0ac-628b1979677d.png" alt="Infantil">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Educação Infantil</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/1bc62ec4-9196-4c1a-b3e3-1562fe2f4de1.png" alt="Fund I">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Fundamental I</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/bdb21a85-da0a-4abd-8d57-1a51de351ae4.png" alt="Fund II">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Fundamental II</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/3629db94-d9ed-44bc-b1f8-c672b1c82530.png" alt="Ateliê">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Ateliê de Artes</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/e872cfc2-32fc-4815-9761-48901562e71b.png" alt="Biblioteca">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Biblioteca</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ATELIÊ SOBRE PAGE -->
+    <div id="atelie-sobre" class="page-container">
+        <section>
+            <h2 class="section-title">Sobre o Ateliê</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>O Coração Criativo</h3>
+                    <p>O Ateliê é mais que um espaço para pintar. É investigação estética, laboratório de experiências sensoriais, lugar onde crianças exploram materiais, cores, formas e técnicas.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Não é Aula de Artes</h3>
+                    <p>Não ensinamos técnicas para reproduzir modelos. Oferecemos materiais, tempo, espaço e provocações para que crianças descubram suas próprias expressões artísticas.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Investigação Plástica</h3>
+                    <p>Crianças investigam: Como a tinta se comporta? O que acontece quando misturamos cores? Como construir uma forma tridimensional? Processo é mais valioso que produto.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Materiais Naturais</h3>
+                    <p>Privilégio de materiais belos e naturais - madeira, algodão, lã, folhas, flores. Também materiais reciclados que estimulam criatividade e sustentabilidade.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Luz e Espaço</h3>
+                    <p>Ambiente com luz natural abundante e espaço amplo que convida movimento e experimentação sem restrições.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Sensibilidade Estética</h3>
+                    <p>Desenvolvemos em crianças olhar sensível para beleza. Aprendem a observar detalhes, apreciar formas, reconhecer harmonia. Educação estética é educação humanizadora.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ATELIÊ GALERIA PAGE -->
+    <div id="atelie-galeria" class="page-container">
+        <section>
+            <h2 class="section-title">Galeria de Investigações Plásticas</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/1d63eea5-1d4a-47be-b279-6f4db6704712.png" alt="Pictóricas">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Investigações Pictóricas</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/a7bb6564-896c-4b85-83f9-f329e88750bf.png" alt="Esculturas">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Esculturas 3D</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/7a44e45a-dda5-41fb-9fa2-98aa53be8253.png" alt="Documentação">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Processos Criativos</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/3629db94-d9ed-44bc-b1f8-c672b1c82530.png" alt="Ateliê">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Espaço do Ateliê</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/e872cfc2-32fc-4815-9761-48901562e71b.png" alt="Instalações">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Instalações Colaborativas</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/b1bd9241-1fef-49e4-a0ac-628b1979677d.png" alt="Expressão">
+                    <div class="gallery-overlay">
+                        <div class="gallery-label">Expressão Livre</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SEGMENTOS - EDUCAÇÃO INFANTIL PAGE -->
+    <div id="segmentos-infantil" class="page-container">
+        <section>
+            <h2 class="section-title">Educação Infantil (4 meses - 5 anos)</h2>
+            <div class="admission-banner" style="margin-bottom: 2rem;">
+                <h3>Período Crucial para Desenvolvimento</h3>
+                <p>Ambiente acolhedor, respeitoso e estimulante com foco em aprendizagem através do brincar</p>
+            </div>
+            
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>Berçário (4 meses - 1 ano)</h3>
+                    <p>Foco em vínculo seguro, desenvolvimento motor, sensorial. Cuidado afetuoso e ambiente seguro e estimulante.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Maternal (1 - 3 anos)</h3>
+                    <p>Desenvolvimento da linguagem, autonomia progressiva. Brincadeira como principal ferramenta educativa.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Pré-escolar (3 - 5 anos)</h3>
+                    <p>Competências sociais, emocionais e cognitivas. Preparação natural para alfabetização.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Matriz Curricular</h2>
+            <div style="background-color: var(--color-white); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/13ea7f32-dc8a-43bc-ab9f-cf33bdd16c28.png" alt="Matriz Curricular Educação Infantil" style="width: 100%; border-radius: 8px; margin-bottom: 1.5rem;">
+                <button class="btn btn-primary" onclick="downloadCurriculum('infantil')" style="width: 100%; font-size: 1.1rem;">
+                    📥 Download Matriz Curricular (PDF)
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Áreas de Desenvolvimento</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>🧠 Cognitivo</h3>
+                    <p>Exploração sensorial, resolução de problemas, desenvolvimento de conceitos básicos através da investigação.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🗣️ Linguagem</h3>
+                    <p>Desenvolvimento bilíngue natural em português e inglês através de conversas significativas e histórias.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>❤️ Sócio-Emocional</h3>
+                    <p>Construção de relacionamentos seguros, desenvolvimento de empatia, expressão de emoções.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🏃 Físico</h3>
+                    <p>Desenvolvimento motor grosso e fino através de movimento livre, brincadeira, manipulação de materiais.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🎨 Artístico</h3>
+                    <p>Exploração de materiais, cores, texturas. Expressão criativa sem pressão de resultado final.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🌱 Natureza</h3>
+                    <p>Contato com plantas, animais, elementos naturais. Início de consciência ambiental.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SEGMENTOS - ENSINO FUNDAMENTAL I PAGE -->
+    <div id="segmentos-fundamental1" class="page-container">
+        <section>
+            <h2 class="section-title">Ensino Fundamental I (6 - 10 anos)</h2>
+            <div class="admission-banner" style="margin-bottom: 2rem;">
+                <h3>Alfabetização e Desenvolvimento de Competências</h3>
+                <p>Projetos integradores que conectam aprendizagem a situações reais e significativas</p>
+            </div>
+            
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>1º e 2º Anos</h3>
+                    <p>Alfabetização em português e inglês. Desenvolvimento de habilidades matemáticas iniciais. Atenção a ritmos individuais de aprendizagem.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>3º, 4º e 5º Anos</h3>
+                    <p>Consolidação de aprendizagens de leitura e escrita. Aprofundamento em todas disciplinas. Projetos maiores e mais complexos.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Abordagem Integrada</h3>
+                    <p>Disciplinas conectadas através de projetos. Aprendizagem ativa. Desenvolvimento de pensamento crítico inicial.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Matriz Curricular</h2>
+            <div style="background-color: var(--color-white); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/ca9aead5-3780-4afc-aae9-e21977d0c719.png" alt="Matriz Curricular Fundamental I" style="width: 100%; border-radius: 8px; margin-bottom: 1.5rem;">
+                <button class="btn btn-primary" onclick="downloadCurriculum('fundamental1')" style="width: 100%; font-size: 1.1rem;">
+                    📥 Download Matriz Curricular (PDF)
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Disciplinas e Componentes</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>📖 Português</h3>
+                    <p>Leitura, escrita, oralidade, literatura. Desenvolvimento de competência linguística em contextos significativos.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🔢 Matemática</h3>
+                    <p>Numeração, operações, geometria, medidas. Resolução de problemas práticos do cotidiano.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🇬🇧 Inglês</h3>
+                    <p>Desenvolvimento bilíngue contínuo. Leitura, escrita e oralidade em nível apropriado para a idade.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🔬 Ciências</h3>
+                    <p>Investigação do mundo natural. Experimentos, observação, questionamento científico.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🌍 Estudos Sociais</h3>
+                    <p>História, geografia, sociedade, cultura. Compreensão do mundo em que vivem.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🎨 Arte e Movimento</h3>
+                    <p>Expressão criativa, educação física, música, movimento. Desenvolvimento integral.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SEGMENTOS - ENSINO FUNDAMENTAL II PAGE -->
+    <div id="segmentos-fundamental2" class="page-container">
+        <section>
+            <h2 class="section-title">Ensino Fundamental II (11 - 15 anos)</h2>
+            <div class="admission-banner" style="margin-bottom: 2rem;">
+                <h3>Pensamento Crítico e Responsabilidade Social</h3>
+                <p>Preparação para ensino médio com aprendizagem significativa e desenvolvimento de autonomia</p>
+            </div>
+            
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>6º Ano</h3>
+                    <p>Transição para múltiplos professores. Aprofundamento em todas disciplinas. Desenvolvimento de hábitos de estudo e responsabilidade.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>7º e 8º Anos</h3>
+                    <p>Consolidação de conhecimentos acadêmicos. Desenvolvimento de pensamento crítico aprofundado. Projetos colaborativos.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>9º Ano</h3>
+                    <p>Preparação para ensino médio. Orientação acadêmica e vocacional. Consolidação de autonomia intelectual.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Matriz Curricular</h2>
+            <div style="background-color: var(--color-white); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/941a408d-4994-4531-bece-fc84cff96b89.png" alt="Matriz Curricular Fundamental II" style="width: 100%; border-radius: 8px; margin-bottom: 1.5rem;">
+                <button class="btn btn-primary" onclick="downloadCurriculum('fundamental2')" style="width: 100%; font-size: 1.1rem;">
+                    📥 Download Matriz Curricular (PDF)
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Componentes Curriculares</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>📚 Linguagens</h3>
+                    <p>Português, Inglês, Artes. Expressão oral, escrita e criativa em profundidade.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🔢 Matemática</h3>
+                    <p>Álgebra, geometria, estatística, probabilidade. Aplicações práticas e resolução complexa de problemas.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🔬 Ciências da Natureza</h3>
+                    <p>Biologia, física, química. Investigação científica, método experimental, compreensão de fenômenos naturais.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🌍 Ciências Humanas</h3>
+                    <p>História, geografia, sociologia. Compreensão de sociedade, culturas, desenvolvimento sustentável.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>💭 Filosofia</h3>
+                    <p>Pensamento crítico, ética, questionamento profundo. Seminários de reflexão filosófica.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>💻 Tecnologia e Inovação</h3>
+                    <p>Pensamento computacional, criatividade digital, responsabilidade na era digital.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- NOTÍCIAS PAGE -->
+    <div id="noticias" class="page-container">
+        <section>
+            <h2 class="section-title">Notícias e Eventos</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>📰 Admissão 2026</h3>
+                    <p><strong>Status:</strong> ABERTO</p>
+                    <p>Recebendo inscrições para todos os segmentos (Educação Infantil, Fundamental I e II) para o ano letivo 2026.</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;" onclick="openModal('admissaoModal')">Inscrever-se Agora</button>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🎨 Mostra de Ateliê 2025</h3>
+                    <p><strong>Tema:</strong> "Investigações Plásticas"</p>
+                    <p>Convidamos pais para apreciar as investigações artísticas de nossas crianças. Celebração da criatividade e do processo.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>📖 Seminários de Literatura</h3>
+                    <p><strong>Próximo:</strong> Março 2025</p>
+                    <p>Encontros mensais onde pais e educadores refletem sobre educação, desenvolvimento infantil e metodologia Reggio Emilia.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🌱 Projeto Sustentabilidade</h3>
+                    <p><strong>Contínuo:</strong> 2024-2025</p>
+                    <p>Investigações práticas: horta, reciclagem, consumo consciente, impacto ambiental. Aprendizagem que transforma.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🎭 Apresentações de Teatro</h3>
+                    <p><strong>Semestral</strong></p>
+                    <p>Nossas crianças dramatizam histórias investigadas. Espaço de expressão, confiança e celebração da aprendizagem.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>🎓 Encontros com Especialistas</h3>
+                    <p><strong>Periódico</strong></p>
+                    <p>Profissionais de diversas áreas compartilham conhecimentos que alimentam projetos de nossas crianças.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SOBRE PAGE -->
+    <div id="sobre" class="page-container">
+        <section>
+            <h2 class="section-title">Sobre a Serendipity School</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>Nossa Missão</h3>
+                    <p>Formar crianças e adolescentes pensantes, criativas, sensíveis e humanizadas, capazes de contribuir positivamente para um futuro mais justo e sustentável.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Nossa Visão</h3>
+                    <p>Ser referência nacional em educação infantil e fundamental, reconhecida pela excelência pedagógica, metodologia inovadora e formação integral.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Nossos Valores</h3>
+                    <p>Respeito à criança como protagonista, qualidade pedagógica inquestionável, inovação educativa contínua, sustentabilidade e inclusão genuína.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Por Que Serendipity School?</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-card">
+                    <h3>Filosofia Pedagógica Robusta</h3>
+                    <p>Baseada em metodologia Reggio Emilia, pesquisa em neurociência infantil e reflexão filosófica profunda sobre educação.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Bilinguismo de Qualidade</h3>
+                    <p>Crianças vivem bilinguismo naturalmente em contextos significativos com educadores qualificados e coerência pedagógica.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Ambiente Especial</h3>
+                    <p>Nosso Palácio oferece espaços amplos, históricos e luminosos que funcionam como "terceiro educador".</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Equipe Qualificada</h3>
+                    <p>Educadores com formação continuada especializada, apaixonados por educação infantil com competência técnica genuína.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Comunidade Engajada</h3>
+                    <p>Pais são parceiros ativos na formação de seus filhos. Comunidade de aprendizagem onde todos crescem juntos.</p>
+                </div>
+                <div class="curriculum-card">
+                    <h3>Educação Integral</h3>
+                    <p>Formamos seres humanos criativos, críticos, sensíveis, responsáveis e capazes de transformar o mundo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="background-color: var(--color-white); padding: 3rem; border-radius: 12px; margin-bottom: 2rem;">
+            <h3 style="color: var(--color-dark); font-size: 1.8rem; margin-bottom: 1rem;">Contato</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h4 style="color: var(--color-primary); margin-bottom: 1rem;">Localização</h4>
+                    <p><strong>Rua do Catete, 84</strong><br>Catete, Rio de Janeiro - RJ<br>22220-000 Brasil</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--color-primary); margin-bottom: 1rem;">Contato Direto</h4>
+                    <p><strong>Email:</strong> serendipity@serendipityschool.org<br><strong>Telefone:</strong> +55 (21) 97685-9301</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--color-primary); margin-bottom: 1rem;">Horário de Atendimento</h4>
+                    <p><strong>Segunda a Sexta:</strong> 7h às 19h30<br>Atendimento por agendamento</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--color-primary); margin-bottom: 1rem;">Admissão</h4>
+                    <button class="btn btn-primary" onclick="openModal('admissaoModal')" style="width: 100%;">Processo de Admissão 2026</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal de Admissão -->
+    <div id="admissaoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Processo de Admissão 2026</h2>
+                <button class="close-btn" onclick="closeModal('admissaoModal')">×</button>
+            </div>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label>Nome da Criança *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Data de Nascimento *</label>
+                    <input type="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Segmento Desejado *</label>
+                    <select required>
+                        <option value="">Selecione...</option>
+                        <option value="infantil">Educação Infantil (4 meses - 5 anos)</option>
+                        <option value="fundamental1">Ensino Fundamental I (6 - 10 anos)</option>
+                        <option value="fundamental2">Ensino Fundamental II (11 - 15 anos)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nome do Responsável *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Telefone *</label>
+                    <input type="tel" required>
+                </div>
+                <div class="form-group">
+                    <label>Mensagem</label>
+                    <textarea rows="4" placeholder="Conte-nos mais sobre você e sua família..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Inscrição</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5521976859301?text=Olá%20Serendipity%20School!%20Gostaria%20de%20mais%20informações" target="_blank" class="whatsapp-button" id="whatsappBtn" title="Contato WhatsApp">
+        💬
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SERENDIPITY SCHOOL</h3>
+                <p>Educação bilíngue de excelência com metodologia Reggio Emilia para crianças dos 4 meses aos 15 anos.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>📍 Rua do Catete, 84 - Catete<br>Rio de Janeiro, RJ - 22220-000</p>
+                <p>📧 serendipity@serendipityschool.org</p>
+                <p>📱 +55 (21) 97685-9301</p>
+            </div>
+            <div class="footer-section">
+                <h3>Horário</h3>
+                <p>Segunda a Sexta<br>7h às 19h30</p>
+                <p style="font-size: 0.85rem; margin-top: 1rem; opacity: 0.7;">Atendimento por agendamento</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <a onclick="goToPage('home')">Home</a>
+                <a onclick="goToPage('segmentos')">Segmentos</a>
+                <a onclick="goToPage('palacio-sobre')">Palácio</a>
+                <a onclick="goToPage('atelie-sobre')">Ateliê</a>
+                <a onclick="goToPage('sobre')">Sobre</a>
+                <a onclick="openModal('admissaoModal'); return false;">Matrícula</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© Copyright 2025 | Serendipity School | Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        function goToPage(pageId) {
+            const pages = document.querySelectorAll('.page-container');
+            pages.forEach(page => page.classList.remove('active'));
+            const page = document.getElementById(pageId);
+            if (page) {
+                page.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function switchTab(event, tabName) {
+            event.preventDefault();
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            const tab = document.getElementById(tabName);
+            if (tab) {
+                tab.classList.add('active');
+            }
+            event.target.classList.add('active');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Obrigado! Sua inscrição foi enviada com sucesso. Entraremos em contato em breve.');
+            closeModal('admissaoModal');
+            event.target.reset();
+        }
+
+        // Language translations
+        const translations = {
+            pt: {
+                // Navigation
+                'escola': 'Escola',
+                'bilinguismo': 'Bilinguismo (Português e Inglês)',
+                'reggio': 'Reggio Emilia',
+                'literatura': 'Literatura & Filosofia',
+                'ppp': 'Projeto Político Pedagógico',
+                'palacio': 'Palácio',
+                'sobre-palacio': 'Sobre o Palácio',
+                'galeria-palacio': 'Galeria',
+                'atelie': 'Ateliê',
+                'sobre-atelie': 'Sobre o Ateliê',
+                'galeria-atelie': 'Galeria',
+                'segmentos': 'Segmentos',
+                'infantil': 'Educação Infantil',
+                'fundamental1': 'Ensino Fundamental I',
+                'fundamental2': 'Ensino Fundamental II',
+                'noticias': 'Notícias',
+                'matricula': 'Matrícula',
+                'sobre': 'Sobre',
+                'serendipity-titulo': 'Serendipity School',
+                'subtitulo': 'O Currículo Mais Luxuoso do Rio de Janeiro',
+                'descricao-hero': 'Formação plena e bilíngue (Português e Inglês) com abordagem italiana Reggio Emilia, Francês, Italiano, Filosofia e Atelierismo.',
+                'idade': 'Dos 4 meses aos 15 anos',
+                'btn-admissao': 'Processo de Admissão 2026',
+                'btn-conhecer': 'Conhecer Mais',
+                'nossa-escola': 'Nossa Escola',
+                'sobre-escola': 'Sobre a Serendipity School',
+                'missao': 'Nossa Missão',
+                'visao': 'Nossa Visão',
+                'valores': 'Nossos Valores',
+                'segmentos-titulo': 'Segmentos',
+                'noticias-titulo': 'Notícias',
+                'contato': 'Contato',
+                'localizacao': 'Localização',
+                'contato-direto': 'Contato Direto',
+                'horario': 'Horário de Atendimento',
+                'email': 'Email',
+                'telefone': 'Telefone',
+                'segunda-sexta': 'Segunda a Sexta',
+                'atendimento': 'Atendimento por agendamento'
+            },
+            en: {
+                // Navigation
+                'escola': 'School',
+                'bilinguismo': 'Bilingualism (Portuguese and English)',
+                'reggio': 'Reggio Emilia',
+                'literatura': 'Literature & Philosophy',
+                'ppp': 'Pedagogical Political Project',
+                'palacio': 'Palace',
+                'sobre-palacio': 'About the Palace',
+                'galeria-palacio': 'Gallery',
+                'atelie': 'Atelier',
+                'sobre-atelie': 'About the Atelier',
+                'galeria-atelie': 'Gallery',
+                'segmentos': 'Segments',
+                'infantil': 'Early Childhood Education',
+                'fundamental1': 'Elementary School I',
+                'fundamental2': 'Elementary School II',
+                'noticias': 'News',
+                'matricula': 'Enrollment',
+                'sobre': 'About',
+                'serendipity-titulo': 'Serendipity School',
+                'subtitulo': 'The Most Luxurious Curriculum in Rio de Janeiro',
+                'descricao-hero': 'Full and bilingual education (Portuguese and English) with Italian Reggio Emilia approach, French, Italian, Philosophy and Atelierism.',
+                'idade': 'From 4 months to 15 years old',
+                'btn-admissao': 'Admission Process 2026',
+                'btn-conhecer': 'Learn More',
+                'nossa-escola': 'Our School',
+                'sobre-escola': 'About Serendipity School',
+                'missao': 'Our Mission',
+                'visao': 'Our Vision',
+                'valores': 'Our Values',
+                'segmentos-titulo': 'Segments',
+                'noticias-titulo': 'News',
+                'contato': 'Contact',
+                'localizacao': 'Location',
+                'contato-direto': 'Direct Contact',
+                'horario': 'Office Hours',
+                'email': 'Email',
+                'telefone': 'Phone',
+                'segunda-sexta': 'Monday to Friday',
+                'atendimento': 'Appointment only'
+            }
+        };
+
+        let currentLanguage = 'pt';
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'pt' ? 'en' : 'pt';
+            const button = document.getElementById('languageToggle');
+            button.textContent = currentLanguage === 'pt' ? 'EN' : 'PT';
+            updatePageLanguage();
+        }
+
+        function updatePageLanguage() {
+            const transDict = translations[currentLanguage];
+            
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (transDict[key]) {
+                    element.textContent = transDict[key];
+                }
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (transDict[key]) {
+                    element.placeholder = transDict[key];
+                }
+            });
+
+            // Update WhatsApp button message
+            const waBtn = document.getElementById('whatsappBtn');
+            const waMessage = currentLanguage === 'pt' 
+                ? 'Olá%20Serendipity%20School!%20Gostaria%20de%20mais%20informações'
+                : 'Hello%20Serendipity%20School!%20I%20would%20like%20more%20information';
+            waBtn.href = `https://wa.me/5521976859301?text=${waMessage}`;
+        }
+
+        // Download curriculum function
+        function downloadCurriculum(segment) {
+            let filename = '';
+            let url = '';
+            
+            if (segment === 'infantil') {
+                filename = 'Matriz_Curricular_Educacao_Infantil.png';
+                url = 'https://user-gen-media-assets.s3.amazonaws.com/seedream_images/13ea7f32-dc8a-43bc-ab9f-cf33bdd16c28.png';
+            } else if (segment === 'fundamental1') {
+                filename = 'Matriz_Curricular_Fundamental_I.png';
+                url = 'https://user-gen-media-assets.s3.amazonaws.com/seedream_images/ca9aead5-3780-4afc-aae9-e21977d0c719.png';
+            } else if (segment === 'fundamental2') {
+                filename = 'Matriz_Curricular_Fundamental_II.png';
+                url = 'https://user-gen-media-assets.s3.amazonaws.com/seedream_images/941a408d-4994-4531-bece-fc84cff96b89.png';
+            }
+            
+            // Create a link element and trigger download
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            alert('Download iniciado: ' + filename);
+        }
+    </script>
+</body>
+</html>
